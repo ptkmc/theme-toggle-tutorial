@@ -1,12 +1,15 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "theme-toggle",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "ptkmc",
   "dependencies": {
+    "@emotion/core": "^10.0.17",
+    "@emotion/styled": "^10.0.17",
     "gatsby": "^2.15.18",
     "gatsby-image": "^2.2.19",
+    "gatsby-plugin-emotion": "^4.1.6",
     "gatsby-plugin-manifest": "^2.2.17",
     "gatsby-plugin-offline": "^3.0.7",
     "gatsby-plugin-react-helmet": "^3.1.7",
@@ -16,7 +19,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-switch": "^5.0.1"
   },
   "devDependencies": {
     "prettier": "^1.18.2"

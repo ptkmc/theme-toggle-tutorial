@@ -11,6 +11,30 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import "./layout.css"
+import { ThemeContext } from "../context/ThemeContext"
+import styled from "@emotion/styled"
+
+const themes = {
+  light: {
+    foreground: "inherit",
+    background: "inherit",
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222",
+  },
+}
+
+const ThemedLayout = styled.div`
+  color: ${props => themes[props.theme.name].foreground};
+  background-color: ${props => themes[props.theme.name].background};
+  transition: all 0.4s ease;
+  min-height: 100vh;
+
+  & a {
+    color: ${props => (props.theme.name === "dark" ? "#B38CD9" : "inherit")};
+  }
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,24 +48,28 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <ThemeContext.Consumer>
+      {theme => (
+        <ThemedLayout theme={theme}>
+          <Header siteTitle={data.site.siteMetadata.title} theme={theme} />
+          <div
+            style={{
+              margin: `0 auto`,
+              maxWidth: 960,
+              padding: `0px 1.0875rem 1.45rem`,
+              paddingTop: 0,
+            }}
+          >
+            <main>{children}</main>
+            <footer>
+              © {new Date().getFullYear()}, Built with
+              {` `}
+              <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </footer>
+          </div>
+        </ThemedLayout>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 
