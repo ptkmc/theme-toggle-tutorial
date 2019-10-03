@@ -2,19 +2,18 @@ import React, { useState } from "react"
 
 export const ThemeContext = React.createContext({
   name: "light",
-  updateTheme: () => {},
+  updateTheme: () => { },
 })
 
 export const ThemeProvider = ({ children }) => {
-  const localTheme = JSON.parse(localStorage.getItem("theme"))
+  const localTheme = localStorage.getItem("theme")
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-
   const [theme, setTheme] = useState(
     localTheme !== null ? localTheme : prefersDark ? "dark" : "light"
   )
 
   const updateTheme = theme => {
-    localStorage.setItem("theme", JSON.stringify(theme))
+    localStorage.setItem("theme", theme)
     setTheme(theme)
   }
 
